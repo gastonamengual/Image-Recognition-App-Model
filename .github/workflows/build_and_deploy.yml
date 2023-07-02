@@ -29,9 +29,9 @@ jobs:
       run: pip install poetry
 
     - name: Set Package Version
-        run: |
-          package_version=`poetry version -s`
-          echo "::set-env name=PACKAGE_VERSION::$(package_version)"
+      run: |
+        package_version=`poetry version -s`
+        echo "::set-env name=PACKAGE_VERSION::$(package_version)"
 
     - name: Verify version is not already uploaded
       run: |
