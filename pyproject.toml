@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "object_detection_model"
+version = "0.0.1"
+description = ""
+authors = ["Gaston <gastonamengual@icloud.com>"]
+readme = "README.md"
+packages = [{include = "object_detection_model"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "==1.24.2"
+matplotlib = "==3.7.1"
+jupyter = "==1.0.0"
+pillow = "==9.5.0"
+opencv-contrib-python-headless = "==4.7.0.72"
+pandas = "==2.0.0"
+python-multipart = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "==7.3.1"
+pytest-cov = "==3.0.0"
+flake8 = "==6.0.0"
+black = "==23.3.0"
+httpx = "*"
+pre-commit = "3.3.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
