@@ -39,7 +39,7 @@ jobs:
             echo "Error: Version $PACKAGE_VERSION already exists on PyPI."
             exit 1
           else
-            echo "Version $PACKAGE_VERSION is not uploaded to PyPI. Proceeding with the workflow."
+            echo "Version $PACKAGE_VERSION is not uploaded to PyPI. Proceeding with the workflow"
           fi
 
     - name: Linter and style check
