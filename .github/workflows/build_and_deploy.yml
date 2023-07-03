@@ -49,6 +49,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        poetry config settings.virtualenvs.in-project true
         poetry install
         poetry shell
 
