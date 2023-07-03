@@ -30,4 +30,3 @@ test = "pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
