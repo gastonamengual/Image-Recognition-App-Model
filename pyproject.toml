@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "object_detection_model"
-version = "0.0.1"
+version = "0.0.2"
 description = ""
 authors = ["Gaston <gastonamengual@icloud.com>"]
 readme = "README.md"

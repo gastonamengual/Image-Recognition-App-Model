@@ -51,7 +51,7 @@ jobs:
       run: poetry install
 
     - name: Test with pytest
-      run: poetry run test
+      run: pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
