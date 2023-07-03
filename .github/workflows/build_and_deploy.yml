@@ -48,7 +48,9 @@ jobs:
         pre-commit run --all-file
 
     - name: Install dependencies
-      run: poetry install
+      run: |
+        poetry install
+        poetry shell
 
     - name: Test with pytest
       run: pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing
