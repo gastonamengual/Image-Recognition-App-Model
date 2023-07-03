@@ -37,7 +37,8 @@ jobs:
       run: |
         package_name=object_detection_model
         count=`pip index versions --pre object_detection_model | grep --count -F "${PACKAGE_VERSION}"`
-
+        echo ${PACKAGE_VERSION}
+        echo $(PACKAGE_VERSION)
         if [ $count -ne 0 ]
         then
             echo version ${PACKAGE_VERSION} for package ${package_name} already exist in PYPI
