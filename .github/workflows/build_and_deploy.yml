@@ -31,7 +31,7 @@ jobs:
     - name: Set Package Version
       run: |
         package_version=`poetry version -s`
-        echo "::set-env name=PACKAGE_VERSION::$(package_version)"
+        echo "PACKAGE_VERSION=$package_version" >> "$GITHUB_OUTPUT"
 
     - name: Verify version is not already uploaded
       run: |
