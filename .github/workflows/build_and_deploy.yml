@@ -30,16 +30,16 @@ jobs:
 
     - name: Verify version is not already uploaded
       run: |
-        package_version=`poetry version -s`
         package_name=object_detection_model
-        count=`pip index versions --pre object_detection_model | grep --count -F "$PACKAGE_VERSION"`
-        echo $PACKAGE_VERSION
+        package_version=`poetry version -s`
+        count=`pip index versions --pre "$package_name" | grep --count -F "$package_version"`
+        echo "$package_version"
         if [ $count -ne 0 ]
         then
-            echo version $PACKAGE_VERSION for package ${package_name} already exist in PYPI
+            echo version "$package_version" for package "${package_name}" already exist in PYPI
             exit 1
         else
-            echo "Validated that version $PACKAGE_VERSION for package ${package_name} does not exist in PYPI."
+            echo "Validated that version "$package_version" for package "$package_name" does not exist in PYPI."
             exit 0
         fi
 
