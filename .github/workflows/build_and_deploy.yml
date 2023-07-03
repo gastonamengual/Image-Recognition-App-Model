@@ -42,6 +42,7 @@ jobs:
             echo "Validated that version "${package_version}" for package "${package_name}" does not exist in PYPI."
             exit 0
         fi
+      shell: bash
 
     - name: Linter and style check
       run: |
