@@ -35,12 +35,17 @@ jobs:
 
     - name: Verify version is not already uploaded
       run: |
-          if poetry search "$PACKAGE_VERSION" | grep -q "$PACKAGE_VERSION"; then
-            echo "Error: Version $PACKAGE_VERSION already exists on PyPI."
+        package_name=object_detection_model
+        count=`pip index versions --pre object_detection_model | grep --count -F "${PACKAGE_VERSION}"`
+
+        if [ $count -ne 0 ]
+        then
+            echo version ${PACKAGE_VERSION} for package ${package_name} already exist in PYPI
             exit 1
-          else
-            echo "Version $PACKAGE_VERSION is not uploaded to PyPI. Proceeding with the workflow."
-          fi
+        else
+            echo "Validated that version ${PACKAGE_VERSION} for package ${package_name} does not exist in PYPI."
+            exit 0
+        fi
 
     - name: Linter and style check
       run: |
@@ -49,7 +54,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry config settings.virtualenvs.in-project true
+        poetry config virtualenvs.in-project true --local
         poetry install
         poetry shell
 
