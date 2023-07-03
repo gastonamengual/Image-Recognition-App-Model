@@ -28,13 +28,9 @@ jobs:
     - name: Install Poetry
       run: pip install poetry
 
-    - name: Set Package Version
-      run: |
-        export package_version=`poetry version -s`
-        echo "::set-env name=PACKAGE_VERSION::$package_version"
-
     - name: Verify version is not already uploaded
       run: |
+        package_version=`poetry version -s`
         package_name=object_detection_model
         count=`pip index versions --pre object_detection_model | grep --count -F "$PACKAGE_VERSION"`
         echo $PACKAGE_VERSION
