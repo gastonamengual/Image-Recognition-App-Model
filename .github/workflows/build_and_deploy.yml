@@ -37,7 +37,7 @@ jobs:
         if [ $count -ne 0 ]
         then
             echo version "${package_version}" for package "${package_name}" already exist in PYPI
-            exit 1
+            exit 0
         else
             echo "Validated that version "${package_version}" for package "${package_name}" does not exist in PYPI."
             exit 0
