@@ -37,7 +37,7 @@ jobs:
         package_version=`poetry version -s`
         count=`pip index versions --pre "${package_name}" | grep --count -F "${package_version}"`
         echo "${package_version}"
-        if [ $count -ne 0 ]
+        if [ ${count} -ne 0 ]
         then
             echo "version '${package_version}' for package '${package_name}' already exist in PYPI"
             exit 1
