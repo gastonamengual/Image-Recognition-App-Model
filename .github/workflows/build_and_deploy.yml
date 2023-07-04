@@ -25,6 +25,9 @@ jobs:
       with:
         python-version: 3.9
 
+    - name: Update Pip Version
+      run: pip install --upgrade pip==22.0.4
+
     - name: Install Poetry
       run: pip install poetry
 
