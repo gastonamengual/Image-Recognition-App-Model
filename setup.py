@@ -14,7 +14,7 @@ required = [
 ]
 
 setup(
-    name="object_recognition_model",
+    name="object_detection_model",
     version=__version__,
     description="An example Python package",
     url="https://github.com/example/example_package",
