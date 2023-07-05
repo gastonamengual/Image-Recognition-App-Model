@@ -53,8 +53,7 @@ jobs:
 
     - name: Run Unit Tests
       run: |
-        pipenv shell
-        pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing
+        pipenv run test
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
