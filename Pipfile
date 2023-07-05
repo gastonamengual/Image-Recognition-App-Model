@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "==1.24.2"
+matplotlib = "==3.7.1"
+jupyter = "==1.0.0"
+pillow = "==9.5.0"
+opencv-contrib-python-headless = "==4.7.0.72"
+pandas = "==2.0.0"
+python-multipart = "*"
+
+[dev-packages]
+pytest = "==7.3.1"
+pytest-cov = "==3.0.0"
+flake8 = "==6.0.0"
+black = "==23.3.0"
+httpx = "*"
+pre-commit = "3.3.1"
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+test = "pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing"

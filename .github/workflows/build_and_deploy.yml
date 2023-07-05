@@ -28,8 +28,8 @@ jobs:
     - name: Update Pip Version
       run: pip install --upgrade pip==22.0.4
 
-    - name: Install Poetry
-      run: pip install poetry
+    - name: Install Pipenv
+      run: pip install pipenv=2022.1.8
 
     # - name: Verify version is not already uploaded
     #   run: |
@@ -50,13 +50,12 @@ jobs:
         pre-commit run --all-file
 
     - name: Install dependencies
-      run: |
-        export CI=true
-        poetry install
-        poetry shell
+      run: pipenv install --deploy --dev --verbose
+      env:
+        PIPENV_ENV_IN_PROJECT: 1
 
-    - name: Test with pytest
-      run: pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing
+    - name: Run Unit Tests
+      run: pipenv run test
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
