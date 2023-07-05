@@ -28,6 +28,9 @@ jobs:
     - name: Update Pip Version
       run: pip install --upgrade pip==22.0.4
 
+    - name: Install Poetry
+      run: pip install poetry
+
     - name: Verify version is not already uploaded
       run: |
         package_name="object_detection_model"
@@ -41,42 +44,3 @@ jobs:
             echo "Validated that version '${package_version}' for package '${package_name}' does not exist in PYPI."
             exit 0
         fi
-
-    - name: Install Poetry
-      run: pip install poetry
-
-
-    - name: Linter and style check
-      run: |
-        pip install pre-commit==3.3.1
-        pre-commit run --all-file
-
-    - name: Install dependencies
-      run: |
-        poetry config virtualenvs.in-project true --local
-        poetry install
-        poetry shell
-
-    - name: Test with pytest
-      run: pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing
-
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@v2
-      if: always()
-      with:
-        files: |
-          pytest-report.xml
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
-
-    steps:
-    - name: Build and Publish to PYPI
-      env:
-        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-
-      run: |
-        poetry config pypi-token.pypi "$(PYPI_TOKEN)"
-        poetry publish --build
