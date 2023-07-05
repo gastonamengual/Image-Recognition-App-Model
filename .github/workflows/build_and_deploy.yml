@@ -51,9 +51,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry config virtualenvs.in-project true --local
         poetry install
-        poetry shell
 
     - name: Test with pytest
       run: pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing
