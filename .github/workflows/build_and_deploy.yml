@@ -82,6 +82,12 @@ jobs:
 
       - name: Install Pipenv
         run: pip install pipenv==2022.1.8
+
+      - name: Install dependencies
+        run: pipenv install --deploy --dev --verbose
+        env:
+          PIPENV_ENV_IN_PROJECT: 1
+
       - name: Build Package
         run: |
           pipenv run build
