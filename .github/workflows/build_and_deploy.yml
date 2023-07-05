@@ -35,7 +35,7 @@ jobs:
       run: |
         package_name="object_detection_model"
         package_version=`poetry version -s`
-        count=0
+        count=`pip index versions --pre object_detection_model | grep --count -F 0.0.2`
         if [ ${count} -ne 0 ]; then
             echo "version '${package_version}' for package '${package_name}' already exist in PYPI"
             exit 1
