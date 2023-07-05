@@ -51,6 +51,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        export CI=true
         poetry install
         poetry shell
 
