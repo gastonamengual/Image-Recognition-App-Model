@@ -3,7 +3,7 @@ from pathlib import Path
 import dparse
 from setuptools import setup
 
-from .object_detection_model import __version__
+from object_detection_model import __version__
 
 content = Path("Pipfile").read_text()
 df = dparse.parse(content, file_type=dparse.filetypes.pipfile)
