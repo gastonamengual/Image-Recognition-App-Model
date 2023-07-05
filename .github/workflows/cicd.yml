@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
 
 jobs:
   build:
@@ -64,3 +64,39 @@ jobs:
         with:
           files: |
             pytest-report.xml
+
+  deployment:
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Update Pip Version
+        run: pip install --upgrade pip==22.0.4
+
+      - name: Install Pipenv
+        run: pip install pipenv==2022.1.8
+
+      - name: Install dependencies
+        run: |
+          pipenv install --deploy --dev --verbose
+        env:
+          PIPENV_ENV_IN_PROJECT: 1
+
+      - name: Build Package
+        run: |
+          pipenv run build
+
+      - name: Publish to PYPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          pipenv run publish
