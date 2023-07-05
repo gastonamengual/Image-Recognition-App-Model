@@ -27,6 +27,6 @@ python_version = "3.9"
 
 [scripts]
 test = "pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing"
-build = "bash -c 'python setup.py clean --all && python setup.py bdist_wheel"
+build = "bash -c 'python setup.py clean --all && python setup.py bdist_wheel'"
 hook = "pre-commit install"
 format = "pre-commit run --all-files"
