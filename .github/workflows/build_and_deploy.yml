@@ -18,52 +18,52 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
 
-    - name: Update Pip Version
-      run: pip install --upgrade pip==22.0.4
+      - name: Update Pip Version
+        run: pip install --upgrade pip==22.0.4
 
-    - name: Install Pipenv
-      run: pip install pipenv==2022.1.8
+      - name: Install Pipenv
+        run: pip install pipenv==2022.1.8
 
-    # - name: Verify version is not already uploaded
-    #   run: |
-    #     package_name="object_detection_model"
-    #     package_version=`poetry version -s`
-    #     version_count=`pip index versions --pre "${package_name}" | grep --count -F "${package_version}"`
-    #     if [ ${version_count} -ne 0 ]; then
-    #         echo "version '${package_version}' for package '${package_name}' already exist in PYPI"
-    #         exit 1
-    #     else
-    #         echo "Validated that version '${package_version}' for package '${package_name}' does not exist in PYPI."
-    #         exit 0
-    #     fi
+      # - name: Verify version is not already uploaded
+      #   run: |
+      #     package_name="object_detection_model"
+      #     package_version=`poetry version -s`
+      #     version_count=`pip index versions --pre "${package_name}" | grep --count -F "${package_version}"`
+      #     if [ ${version_count} -ne 0 ]; then
+      #         echo "version '${package_version}' for package '${package_name}' already exist in PYPI"
+      #         exit 1
+      #     else
+      #         echo "Validated that version '${package_version}' for package '${package_name}' does not exist in PYPI."
+      #         exit 0
+      #     fi
 
-    - name: Linter and style check
-      run: |
-        pip install pre-commit==3.3.1
-        pre-commit run --all-file
+      - name: Linter and style check
+        run: |
+          pip install pre-commit==3.3.1
+          pre-commit run --all-file
 
-    - name: Install dependencies
-      run: pipenv install --deploy --dev --verbose
-      env:
-        PIPENV_ENV_IN_PROJECT: 1
+      - name: Install dependencies
+        run: pipenv install --deploy --dev --verbose
+        env:
+          PIPENV_ENV_IN_PROJECT: 1
 
-    - name: Run Unit Tests
-      run: |
-        pipenv run test
+      - name: Run Unit Tests
+        run: |
+          pipenv run test
 
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@v2
-      if: always()
-      with:
-        files: |
-          pytest-report.xml
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          files: |
+            pytest-report.xml
 
   deploy:
     needs: build
@@ -71,13 +71,24 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
 
     steps:
-    - name: Build Package
-      run: |
-        pipenv run build
 
-    - name: Publish to PYPI
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-      run: |
-        twine upload dist/*
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Update Pip Version
+        run: pip install --upgrade pip==22.0.4
+
+      - name: Install Pipenv
+        run: pip install pipenv==2022.1.8
+      - name: Build Package
+        run: |
+          pipenv run build
+
+      - name: Publish to PYPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          twine upload dist/*
