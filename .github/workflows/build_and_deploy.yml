@@ -25,11 +25,8 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Update Pip Version
-      run: pip install --upgrade pip==22.0.4
-
     - name: Install Pipenv
-      run: pip install pipenv==2022.1.8
+      run: pip install pipenv
 
     # - name: Verify version is not already uploaded
     #   run: |
