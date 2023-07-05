@@ -18,10 +18,15 @@ pytest-cov = "==3.0.0"
 flake8 = "==6.0.0"
 black = "==23.3.0"
 httpx = "*"
-pre-commit = "3.3.1"
+pre-commit = "==3.3.1"
+dparse = "==0.6.3"
+twine = "==4.0.2"
 
 [requires]
 python_version = "3.9"
 
 [scripts]
 test = "pytest ./tests -rA --doctest-modules --junitxml=pytest-report.xml --cov=. --cov-report=html --cov-report term-missing"
+build = "bash -c 'python setup.py clean --all && python setup.py bdist_wheel"
+hook = "pre-commit install"
+format = "pre-commit run --all-files"

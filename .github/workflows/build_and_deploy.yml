@@ -25,8 +25,11 @@ jobs:
       with:
         python-version: 3.9
 
+    - name: Update Pip Version
+      run: pip install --upgrade pip==22.0.4
+
     - name: Install Pipenv
-      run: pip install pipenv
+      run: pip install pipenv==2022.1.8
 
     # - name: Verify version is not already uploaded
     #   run: |
@@ -65,13 +68,16 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
 
     steps:
-    - name: Build and Publish to PYPI
-      env:
-        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-
+    - name: Build Package
       run: |
-        poetry config pypi-token.pypi "$(PYPI_TOKEN)"
-        poetry publish --build
+        pipenv run build
+
+    - name: Publish to PYPI
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        twine upload dist/*
