@@ -21,4 +21,5 @@ setup(
     author="Your Name",
     author_email="your.email@example.com",
     install_requires=[required],
+    include_package_data=True,
 )
