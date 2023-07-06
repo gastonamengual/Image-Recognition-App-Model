@@ -18,6 +18,12 @@ def test_detect_objects(sample_img_url: str):
         image_bytes = io.BytesIO(image_file.read()).read()
     processed_image = np.frombuffer(image_bytes, dtype=np.uint8)
 
-    model = Model(ModelConfig())
+    model = Model(
+        ModelConfig(
+            config_file_path="object_detection_model/model_files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt",
+            frozen_model_path="object_detection_model/model_files/frozen_inference_graph.pb",
+            labels_path="object_detection_model/model_files/coco.names",
+        )
+    )
     model.detect_object(data=processed_image)
     assert type(image_bytes) == bytes

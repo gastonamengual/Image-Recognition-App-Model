@@ -9,12 +9,16 @@ from numpy.typing import ArrayLike
 matplotlib.use("Agg")  # Solves some error
 
 
+CONFIG_FILE_NAME = "ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
+FROZEN_MODEL_NAME = "frozen_inference_graph.pb"
+LABELS_NAME = "coco.names"
+
+
+@dataclass
 class ModelConfig:
-    config_file_path: str = "object_detection_model/model_files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
-    frozen_model_path: str = (
-        "object_detection_model/model_files/frozen_inference_graph.pb"
-    )
-    labels_path: str = "object_detection_model/model_files/coco.names"
+    config_file_path: str = ""
+    frozen_model_path: str = ""
+    labels_path: str = ""
 
 
 @dataclass
