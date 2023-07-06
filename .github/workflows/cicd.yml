@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         run: pipenv install --deploy --dev --verbose
         env:
-          PIPENV_ENV_IN_PROJECT: 1
+          PIPENV_VENV_IN_PROJECT: 1
 
       - name: Run Unit Tests
         run: |
@@ -89,7 +89,7 @@ jobs:
         run: |
           pipenv install --deploy --dev --verbose
         env:
-          PIPENV_ENV_IN_PROJECT: 1
+          PIPENV_VENV_IN_PROJECT: 1
 
       - name: Build Package
         run: |

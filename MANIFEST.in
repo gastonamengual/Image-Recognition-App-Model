@@ -1,0 +1,3 @@
+include object_detection_model/model_files/coco.names
+include object_detection_model/model_files/frozen_inference_graph.pb
+include object_detection_model/model_files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt

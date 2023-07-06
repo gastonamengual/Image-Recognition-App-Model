@@ -10,11 +10,11 @@ matplotlib.use("Agg")  # Solves some error
 
 
 class ModelConfig:
-    config_file_path: str = "object_detection_model/object_detection/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
+    config_file_path: str = "object_detection_model/model_files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
     frozen_model_path: str = (
-        "object_detection_model/object_detection/frozen_inference_graph.pb"
+        "object_detection_model/model_files/frozen_inference_graph.pb"
     )
-    labels_path: str = "object_detection_model/object_detection/coco.names"
+    labels_path: str = "object_detection_model/model_files/coco.names"
 
 
 @dataclass
