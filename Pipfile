@@ -6,10 +6,8 @@ name = "pypi"
 [packages]
 numpy = "==1.24.2"
 matplotlib = "==3.7.1"
-jupyter = "==1.0.0"
 pillow = "==9.5.0"
 opencv-contrib-python-headless = "==4.7.0.72"
-pandas = "==2.0.0"
 python-multipart = "*"
 importlib-resources ="*"
 
